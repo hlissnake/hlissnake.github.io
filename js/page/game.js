@@ -9,7 +9,7 @@ define(function(require, exports, module){
 	var assetsMap = {
 		'runner' : './image/runner.png',
 		'hill' : './image/hill.png',
-		'sky' : './image/sky.png',
+		'sky' : './image/bg.png',
 		'blood' : './image/blood.png',
 		'ground' : './image/ground.png',
 		'start' : './image/start.png'
@@ -22,8 +22,9 @@ define(function(require, exports, module){
 		jumpHeightPix = 60;
 		
 	var runnerVelocity = 100
-	,	grundVelocity = 80
-	,	hillVelocity = 30
+	,	grundVelocity = 100
+	,	hillVelocity = 50
+	,	skyVelocity = 30
 	,	rockRotateTime = 2
 	,	rockVelocity = Math.PI * 50 / 2 + grundVelocity
 	,	rockRotateVelocity = 360 / 2;
@@ -198,6 +199,7 @@ define(function(require, exports, module){
 						width : stage.width,
 						height : stage.height - 60,
 						backgroundImage : loader.get('sky'),
+						imagePositionX : 0,
 						backgroundRepeatX : true,
 						shape : Com.Shape.Rect,
 						painter : Com.Painter.Bitmap
@@ -343,6 +345,12 @@ define(function(require, exports, module){
 						hill.x = stage.width + 60;
 					} else {
 						hill.x = hill.x - hillVelocity * dt;
+					}
+
+					if(sky.imagePositionX >= sky.maxPositionX) {
+						sky.imagePositionX = 0;
+					} else {
+						sky.imagePositionX += skyVelocity * dt;
 					}
 
 					TWEEN.update();
