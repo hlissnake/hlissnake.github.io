@@ -60,6 +60,11 @@ define(function(require, exports, module){
 				com.context = this.context;
 				com.stage = this.type == 'stage' ? this : this.stage;
 				this.children.push(com);
+
+				// sort children array by zIndex
+				this.children.sort(function(a, b){
+					return a.zIndex - b.zIndex;
+				});
 			}
 		},
 
@@ -170,13 +175,18 @@ define(function(require, exports, module){
 			}
 		},
 
+		/**
+		 * for html events or observer events
+		 * only listen to trigger com's events. not include children target com in event object
+		 * this can aviod the findTarget function recursion to improve the performance
+		 */
 		on : function(ev, callback){
 			var me = this;
 			if( _COMEvents.indexOf(',' + ev + ',') > -1) {
 				var stage = this.type == 'stage' ? this : this.stage;
 				stage._addEventListener(ev, me, function(e){
 					callback && callback.call(me, e);			
-				});
+				}, true);
 			} else if ( _COMCustomEvents.indexOf(',' + ev + ',') > -1) {
 
 			} else {
@@ -185,7 +195,25 @@ define(function(require, exports, module){
 			return me;
 		},
 
-		_addEventListener : function(ev, trigger, callback){
+		/**
+		 * for html events only, not observer events
+		 * delegate the children coms event. include the target children com in event object
+		 */
+		delegate : function(ev, comId, callback){
+			var me = this;
+			if( _COMEvents.indexOf(',' + ev + ',') > -1) {
+				var stage = this.type == 'stage' ? this : this.stage;
+				stage._addEventListener(ev, me, function(e){
+					// only match com of the prvoided id, can trigger the event callback
+					if(e.targetCom.id && e.targetCom.id == comId) {
+						callback && callback.call(me, e);
+					}
+				});
+			}
+			return me;
+		},
+
+		_addEventListener : function(ev, trigger, callback, listenSelf){
 			var ev_map = this.ev_map
 			,	me = this
 			;
@@ -197,7 +225,8 @@ define(function(require, exports, module){
 			}
 			ev_map[ev].push({
 				t : trigger,
-				fn : callback
+				fn : callback,
+				listenSelf : listenSelf
 			});	
 		},
 
@@ -225,30 +254,24 @@ define(function(require, exports, module){
 			var callbackList = this.ev_map[eventType];
 
 			for(var i = 0; i < callbackList.length; i++) {
-				var trigger = callbackList[i].t
-				,	target = trigger._findTarget(coordinate)
+				var cb = callbackList[i]
+				,	trigger = cb.t
+				,	target = trigger._findTarget(coordinate, cb.listenSelf)
 				;
 				if(target) {
 					e.targetCom = target;
-					callbackList[i].fn.call(trigger, e);
+					cb.fn.call(trigger, e);
 					continue;
 				}			
 			}
-			// for(var i = 0; i < callbaclList.length; i++) {
-			// 	if(callbaclList[i].t == target) {
-			// 		callbaclList[i].fn.call(target, e);
-			// 		break;
-			// 	}
-			// }
 		},
 
-		_findTarget : function(coord){
+		_findTarget : function(coord, listenSelf){
 			var me = this
 			,	context = me.context
 			,	inPath
 			,	target
 			;
-			
 			function find(com, ctx){
 				var result = true;
 
@@ -265,8 +288,10 @@ define(function(require, exports, module){
 				
 				if(inPath) {
 					target = com;
-				// } else 
-					if(com.children) {
+					// only listen com self, no need to find children target, quit the function recursion
+					if(listenSelf) {
+						result = true;
+					} else if(com.children) {
 						var children = com.children;
 						ctx.translate(com.x, com.y);
 

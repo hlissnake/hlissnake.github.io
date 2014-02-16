@@ -228,6 +228,7 @@ define(function(require, exports, module){
 					})
 
 				,	startBtn = new Com({
+					id : 'start',
 					x : canvas.width / 2 - 131 / 2,
 					y : 80 + 72 / 2,
 					width : 131,
@@ -300,22 +301,22 @@ define(function(require, exports, module){
 				stage.append(blood);
 				stage.append(startBtn)
 
-				stage.on('touchstart', function(e){
-					if(e.targetCom == startBtn) {
-						Game.gameStart();
-						startBtn.visible = false;
-					} else {
-						if (runner.die) return;
-						runner.framerate = 1;
-						Game.Jumping = true;
-						runner.play('jump', function(){
-							runner.framerate = 0;
-							Game.Jumping = false;
-							this.play('run'); //console.log( (+new Date) - start );
-						});
+				stage.on('touchstart', function(){
+					if (runner.die) return;
+					runner.framerate = 1;
+					Game.Jumping = true;
+					runner.play('jump', function(){
+						runner.framerate = 0;
+						Game.Jumping = false;
+						this.play('run'); //console.log( (+new Date) - start );
+					});
 
-						Game.jumpBehavior.jump(runner);
-					}
+					Game.jumpBehavior.jump(runner);
+				})
+
+				stage.delegate('touchstart', 'start', function(e){
+					Game.gameStart();
+					startBtn.visible = false;
 				});
 
 				var last_update = 0
