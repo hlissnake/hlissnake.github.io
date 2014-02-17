@@ -140,6 +140,10 @@ define(function(require, exports, module){
 			}
 			context.globalAlpha = this.opacity;
 			context.fillStyle = this.fillColor;
+			if (this.font) {
+				context.font = this.font;
+				context.textAlign = 'center';
+			}
 			if (this.strokeColor) context.strokeStyle = this.strokeColor;
 			if (this.lineWidth) context.lineWidth = this.lineWidth;
 		},
@@ -205,8 +209,14 @@ define(function(require, exports, module){
 				var stage = this.type == 'stage' ? this : this.stage;
 				stage._addEventListener(ev, me, function(e){
 					// only match com of the prvoided id, can trigger the event callback
-					if(e.targetCom.id && e.targetCom.id == comId) {
-						callback && callback.call(me, e);
+					if(comId) {
+						if(e.targetCom.id && e.targetCom.id == comId) {
+							callback && callback.call(me, e);
+						}
+					} 
+					// if comId is null or '', just trigger callback for itself
+					else {
+						callback && callback.call(me, e);	
 					}
 				});
 			}
@@ -343,7 +353,7 @@ define(function(require, exports, module){
 	COMObject.Painter = {
 		Text : {
 			draw : function(com, ctx, dt){
-				ctx.fillText(com.text, com.x, com.y)
+				ctx.fillText(com.text, com.x, com.y);
 			}
 		},
 

@@ -1,0 +1,150 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <script src="./js/sea.js"></script>
+    <script src="./js/tween.js"></script>
+</head>
+<body>
+<style>
+
+	body, div {
+		text-align: -webkit-center;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+	#canvas {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	#buffer {
+		display: none;
+	}
+	@-webkit-keyframes circle {
+	    0% {-webkit-transform: rotate(0deg);}
+	    100% {-webkit-transform: rotate(359deg);}
+	}
+	@keyframes circle {
+	    0% {transform: rotate(0deg);}
+	    100% { transform: rotate(359deg);}
+	}
+	#loading {
+		display: none;
+	    background-image: url(http://gtms01.alicdn.com/tps/i1/T1CRMcFaFlXXX1dP6j-60-60.png);
+	    background-repeat: no-repeat;
+	    background-size: 30px 30px;
+	    -moz-animation: circle 1s infinite linear;
+	    -o-animation: circle 1s infinite linear;
+	    -webkit-animation: circle 1s infinite linear;
+	    animation: circle 1s infinite linear;
+	    width: 30px;
+	    height: 30px;
+	    margin: 0 auto;
+	    margin-top: 150px;
+	}
+	#notice {
+		background-color: #444;
+		color: white;
+		width: 100%;
+		height: 100%;
+		padding-top: 45%;
+		text-align: center;
+	}
+	#fps {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width : 60px;
+		height : 30px;
+	}
+	#gamepad {
+		position: absolute;
+		left: 0;
+		top: 0;
+		text-align: center;
+	}
+	#title {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 20px;
+		text-align: center;
+		border-radius: 8px;
+		background-color: pink;
+		color: white;
+		font-weight: 900;
+		font-size: 15px;
+		/*margin: 20px auto;*/
+		padding: 6px;
+	}
+</style>	
+
+<canvas id="canvas"></canvas>
+<canvas id="buffer" height=100% ></canvas>
+
+<div id="title"> 点击跳跃，倾斜手机控制速度</div>	
+
+<div id="fps"> </div>	
+
+<!-- <div id="gamepad">
+	<button id="start">START</button>
+</div> -->
+
+<div id="loading"></div>
+
+<div id="notice">pleas rotate your device</div>
+
+<script type="text/javascript">
+
+	document.addEventListener('touchmove', function(e){
+		e.preventDefault();
+	})
+
+	seajs.config({
+		paths : {
+			com : './js/com',
+			page : './js/page'
+		}
+	});
+
+	seajs.use(['page/game'], function(Game){
+
+		var init = true;
+		
+		window.addEventListener('orientationchange', function(e){alert(window.orientaion);
+
+			if (window.orientaion == 0) {
+
+				notice.style.display = 'block';
+
+			} else if (window.orientaion == 90 || window.orientaion == -90) {
+
+				notice.style.display = 'none';
+				if(init) {
+
+					loading.style.display = 'block';
+					init = false;
+
+					Game.init();
+
+				}
+			}
+		});
+
+		notice.style.display = 'none';
+		loading.style.display = 'block';
+		Game.init();
+	});
+
+</script>
+<!-- <script src="http://jsconsole.com/remote.js?6BBC0FC7-1E68-4509-97FE-F4C4C57AD735"></script> -->
+
+</body>
+</html>

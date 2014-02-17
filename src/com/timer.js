@@ -3,10 +3,10 @@ define(function(require, exports, module){
 	var Observer = require('./observer');
 
 	var RAF = 
-		requestAnimationFrame || 
-		webkitRequestAnimationFrame || 
+		window.requestAnimationFrame || 
+		window.webkitRequestAnimationFrame || 
 		function(callback){
-			setTimeout(callback, 1000 / 60);
+			setTimeout(callback, 1 / 60);
 		};
 
 	var Timer = Observer.extend({
@@ -37,7 +37,7 @@ define(function(require, exports, module){
 			return this;
 		},
 
-		stop : function(){
+		pause : function(){
 			this._run = false;
 
 			return this;

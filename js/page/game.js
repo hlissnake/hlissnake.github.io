@@ -23,8 +23,8 @@ define(function(require, exports, module){
 		
 	var runnerVelocity = 100
 	,	grundVelocity = 100
-	,	hillVelocity = 50
-	,	skyVelocity = 30
+	,	hillVelocity = 60
+	,	skyVelocity = 20
 	,	rockRotateTime = 2
 	,	rockVelocity = Math.PI * 50 / 2 + grundVelocity
 	,	rockRotateVelocity = 360 / 2;
@@ -194,8 +194,6 @@ define(function(require, exports, module){
 				};
 
 				var sky = new Com({
-						x : 0,
-						y : 0,
 						width : stage.width,
 						height : stage.height - 60,
 						backgroundImage : loader.get('sky'),
@@ -206,7 +204,6 @@ define(function(require, exports, module){
 					})
 
 				,	ground = new Com({
-						x : 0,
 						y : canvas.height - 60,
 						width : canvas.width,
 						height : 60,
@@ -228,14 +225,14 @@ define(function(require, exports, module){
 					})
 
 				,	startBtn = new Com({
-					id : 'start',
-					x : canvas.width / 2 - 131 / 2,
-					y : 80 + 72 / 2,
-					width : 131,
-					height : 72,
-					backgroundImage : loader.get('start'),
-					shape : Com.Shape.Rect,
-					painter : Com.Painter.Bitmap
+						id : 'start',
+						x : canvas.width / 2 - 131 / 2,
+						y : 80 + 72 / 2,
+						width : 131,
+						height : 72,
+						backgroundImage : loader.get('start'),
+						shape : Com.Shape.Rect,
+						painter : Com.Painter.Bitmap
 					})
 
 				,	bloodSheetPainter = new SpriteSheet({
@@ -250,8 +247,6 @@ define(function(require, exports, module){
 					})
 
 				,	blood = new Sprite({
-						x : 0,
-						y : 0,
 						width : 50,
 						height : 50,
 						visible : false,
@@ -288,9 +283,10 @@ define(function(require, exports, module){
 					y : Game.stage.height - 60 - 90,
 					width : 50,
 					height : 90,
-					loop : true,
+					zIndex : 10,
 					shape : Com.Shape.Rect,
 					painter : spriteSheetPainter,
+					loop : true,
 					autoPlay : true
 				});
 
