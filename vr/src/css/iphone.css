@@ -1,0 +1,190 @@
+.ms-effect-1.ms-view-layers #ms-device {
+    /*-webkit-transform: rotateY(50deg) rotateX(20deg) translateZ(-15px) translateZ(-224px);
+    -moz-transform: rotateY(50deg) rotateX(20deg) translateZ(-15px) translateZ(-224px);
+    transform: rotateY(57deg) rotateX(10deg) translateZ(-15px) translateZ(-224px);*/
+}
+#ms-device, .ms-object, .ms-object > div, .ms-screens a {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+#ms-device {
+    position: absolute;
+    width: 239.99952px;
+    height: 508px;
+    left: 50%;
+    top: 50%;
+    margin: -254px 0 0 -120px ;
+    /*-webkit-transition: -webkit-transform 0.7s ease-in-out;
+    -moz-transition: -moz-transform 0.7s ease-in-out;
+    transition: transform 0.7s ease-in-out;*/
+    -webkit-transform: rotateY(17deg) rotateX(10deg);
+    -moz-transform: rotateY(17deg) rotateX(10deg);
+    transform: rotateY(17deg) rotateX(10deg);
+}
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ms-object {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /*left: 50%;
+    top: 50%;
+    margin: -25% 0 0 -25%;*/
+    /*-webkit-transition: -webkit-transform 0.4s;
+    -moz-transition: -moz-transform 0.4s;
+    transition: transform 0.4s;*/
+}
+
+.ms-object .ms-front {
+    background: #181818 url(http://gtms02.alicdn.com/tps/i2/TB1L9HtHpXXXXX0XpXXSffm_VXX-240-508.png) no-repeat top left;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.ms-object .ms-back {
+    background: #181818 url(http://gtms01.alicdn.com/tps/i1/TB1.nzpHpXXXXXkaXXXAgJK_VXX-344-734.png) no-repeat;
+    background-size: 100% 100%;
+}
+.ms-object > div {
+    position: absolute;
+    display: block;
+    background: #181818;
+}
+.ms-front {
+    -webkit-transform: rotateY(0deg) translateZ(15px);
+    -moz-transform: rotateY(0deg) translateZ(15px);
+    transform: rotateY(0deg) translateZ(15px);
+}
+.ms-front #home-button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 50%;
+    bottom: 18px;
+    margin-left: -20px;
+}
+
+.ms-back {
+    -webkit-transform: rotateY(180deg) translateZ(15px);
+    -moz-transform: rotateY(180deg) translateZ(15px);
+    transform: rotateY(180deg) translateZ(15px);
+}
+
+.ms-front, .ms-back {
+    width: 239.99952px;
+    height: 508px;
+    border-radius: 34px;
+}
+
+.ms-object .ms-left {
+    background-image: url(http://gtms02.alicdn.com/tps/i2/TB1XuHrHpXXXXXNXVXXIYQJQpXX-42-602.png);
+    background-size: 100% 100%;
+    -webkit-transform: translateY(30px) rotateY(-90deg) translateZ(15px);
+    -moz-transform: translateY(30px) rotateY(-90deg) translateZ(15px);
+    transform: translateY(30px) rotateY(-90deg) translateZ(15px);
+}
+.ms-left, .ms-right {
+    width: 30px;
+    height: 448px;
+}
+
+.ms-side:before, .ms-side:after {
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 30px;
+    height: 25px;
+    background: #181818;
+    background: -webkitlinear-gradient(bottom, #181818 0%, #333333 100%);
+    background: -moz-linear-gradient(bottom, #181818 0%, #333333 100%);
+    background: linear-gradient(to top, #181818 0%, #333333 100%);
+    content: "";
+    -webkit-transform: rotateX(22.5deg) translateZ(-6px);
+    -moz-transform: rotateX(22.5deg) translateZ(-6px);
+    transform: rotateX(22.5deg) translateZ(-6px);
+}
+.ms-side:after {
+    top: 100%;
+    background: -webkit-linear-gradient(top, #181818 0%, #333333 100%);
+    background: -moz-linear-gradient(top, #181818 0%, #333333 100%);
+    background: linear-gradient(to bottom, #181818 0%, #333333 100%);
+    -webkit-transform: rotateX(-22.5deg) translateZ(-6px);
+    -moz-transform: rotateX(-22.5deg) translateZ(-6px);
+    transform: rotateX(-22.5deg) translateZ(-6px);
+}
+
+.ms-object .ms-right {
+    background-image: url(http://gtms03.alicdn.com/tps/i3/TB1xfDCHpXXXXXSXpXXIYQJQpXX-42-602.png);
+    background-size: 100% 100%;
+    -webkit-transform: translateY(30px) rotateY(90deg) translateZ(224.99952px);
+    -moz-transform: translateY(30px) rotateY(90deg) translateZ(224.99952px);
+    transform: translateY(30px) rotateY(90deg) translateZ(224.99952px);
+}
+
+.ms-top {
+    -webkit-transform: rotateZ(-90deg) translateY(15px) rotateY(90deg);
+    -moz-transform: rotateZ(-90deg) translateY(15px) rotateY(90deg);
+    transform: rotateZ(-90deg) translateY(15px) rotateY(90deg);
+}
+.ms-top, .ms-bottom {
+    width: 30px;
+    height: 179.99952px;
+    -webkit-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+}
+
+.ms-bottom {
+    -webkit-transform: rotateZ(-90deg) translateY(15px) rotateY(-90deg) translateZ(508px);
+    -moz-transform: rotateZ(-90deg) translateY(15px) rotateY(-90deg) translateZ(508px);
+    transform: rotateZ(-90deg) translateY(15px) rotateY(-90deg) translateZ(508px);
+}
+
+.ms-screen {
+    background-size: 100% 100%;
+    position: absolute;
+    width: 203.99959px;
+    height: 362.0008px;
+    top: 72.9996px;
+    left: 17.99996px;
+    outline: none;
+    display: block;
+    cursor: pointer;
+    opacity: 1;
+    -webkit-transform: translateZ(16px);
+    -moz-transform: translateZ(16px);
+    transform: translateZ(16px);
+}
+.ms-screen #main-screen {
+    background-image: url(http://gtms03.alicdn.com/tps/i3/TB165jDHpXXXXcHXpXXQHSCIXXX-250-444.jpg);
+    background-size: 100% 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.ms-screen #tmall {
+    background-image: url(http://gtms01.alicdn.com/tps/i1/TB1SznpHpXXXXaQXFXXrpqv7VXX-632-1132.png_600x600.jpg);
+    background-size: 100% 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: scale(1);
+    -webkit-transition: -webkit-transform 0.6s ease;
+}
+.ms-screens::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+}

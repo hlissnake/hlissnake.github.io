@@ -1,0 +1,103 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+</head>
+<body onload="onload">
+<style>
+
+	body, div {
+		text-align: -webkit-center;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	#stage{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		/*-webkit-transition: perspective 1s linear;*/
+		/*-webkit-perspective: 1px;*/
+	}
+	#stage .cube {
+		/*-webkit-transition: transform 0.2s linear;*/
+		/*-webkit-transform: translateZ(-10px);*/
+	}
+	#stage .cube-container {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+	}
+	#stage .cube div {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		/*border: 1px solid red;*/
+		-webkit-backface-visibility:hidden;
+	}
+
+</style>	
+<div id="stage">
+	<div class="cute">
+		<div class="cute-container">
+			<div class="front"></div>
+			<div class="back"></div>
+			<div class="left"></div>
+			<div class="right"></div>
+			<div class="up"></div>
+			<div class="down"></div>
+		</div>
+	</div>
+</div>
+<div id="log"></div>
+
+<script src="http://g.alicdn.com/kissy/k/1.4.7/seed-min.js"></script>
+<script type="text/javascript" src="../src/js/lib/hilo.js"></script>
+<script type="text/javascript">
+
+	KISSY.config({
+        packages: {
+            "vr":{
+                // tag: (+new Date),
+                base:"../src/js/",
+                charset: "utf-8",
+                debug:true,
+                ignorePackageNameInUri:true
+                // combine:true
+            }
+        }
+    });
+
+    KISSY.use("vr/cube", function(S, Cube) {
+
+    	var vr_car = new Cube({
+    		el : document.getElementById('stage'),
+    		fv : document.body.getBoundingClientRect().width,
+    		type : S.UA.ios ? '' : 'touch',
+    		alicdn_prefix : '_400x400',
+    		textures : {
+    			'up' : 'http://gtms01.alicdn.com/tps/i1/TB1NsxSHpXXXXcLXVXXOBC9PXXX-1600-1600.jpg_400x400.jpg',
+    			'down' : 'http://gtms01.alicdn.com/tps/i1/TB1lSChHpXXXXb_XVXXOBC9PXXX-1600-1600.jpg_400x400.jpg',
+    			'left' : 'http://gtms03.alicdn.com/tps/i3/TB1dDipHpXXXXasXFXXOBC9PXXX-1600-1600.jpg_400x400.jpg',
+    			'right' : 'http://gtms04.alicdn.com/tps/i4/TB1bml6HpXXXXXxaXXXOBC9PXXX-1600-1600.jpg_400x400.jpg',
+    			'front' : 'http://gtms02.alicdn.com/tps/i2/TB1fVGOHpXXXXc_XpXXOBC9PXXX-1600-1600.jpg_400x400.jpg',
+    			'back' : 'http://gtms04.alicdn.com/tps/i4/TB1_T1OHpXXXXaUXXXXOBC9PXXX-1600-1600.jpg_400x400.jpg'
+    		}
+    	});
+
+    });
+
+</script>
+
+</body>
+</html>

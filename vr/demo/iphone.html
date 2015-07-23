@@ -1,0 +1,104 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../src/css/iphone.css">
+</head>
+<body onload="onload">
+<style>
+
+	body, div {
+		text-align: -webkit-center;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+
+	}
+
+	#stage{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		/*background-color: green;*/
+		-webkit-perspective: 800px;
+		-webkit-transform-style: preserve-3d;
+		/*-webkit-transition: perspective 1s linear;*/
+		/*-webkit-perspective: 1px;*/
+	}
+
+</style>	
+<div id="stage">
+	<div id="ms-device">
+		<div class="ms-object">
+			<div class="ms-front">
+				<div id="home-button"></div>
+			</div>
+			<div class="ms-back"></div>
+			<div class="ms-left ms-side"></div>
+			<div class="ms-right ms-side"></div>
+			<div class="ms-top ms-side"></div>
+			<div class="ms-bottom ms-side"></div>
+		</div>
+		<div class="ms-screen">
+			<div id="main-screen"></div>
+			<div id="tmall"></div>
+			<!-- <iframe class="tmall" width="320px" height="362px" src="http://www.taobao.com?t=2434"></iframe> -->
+		</div>
+	</div>
+</div>
+<div id="log"></div>
+
+<script src="http://g.alicdn.com/kissy/k/1.4.7/seed-min.js"></script>
+<script type="text/javascript" src="../src/js/lib/hilo.js"></script>
+<script type="text/javascript">
+
+	KISSY.config({
+        packages: {
+            "vr":{
+                tag: (+new Date),
+                base:"../src/js/",
+                charset: "utf-8",
+                debug:true,
+                ignorePackageNameInUri:true
+                // combine:true
+            }
+        }
+    });
+
+    KISSY.use('vr/touch', function(S, Touch){
+
+		var Ticker = Hilo.Ticker;
+		var Tween = Hilo.Tween;
+
+    	var el = document.getElementById('stage'),
+    		tmall = document.getElementById('tmall'),
+    		iphoneStyle = document.getElementById('ms-device').style;
+
+    	Touch.bindEvent(el, {
+    		render : function(x, y, scale){
+				iphoneStyle.webkitTransform = [ 'scale(', scale, ')',
+											 'translateZ(0) ',
+											 'rotateX(', -x, 'deg) ', 
+										 	 'rotateY(', -y,'deg) ',
+											 'rotateZ(0)'
+											].join('');
+    		}
+    	});
+
+    	document.getElementById('home-button').addEventListener('click', function(){
+    		tmall.style.webkitTransform = 'scale(0)';
+    	})
+
+    });
+
+</script>
+
+</body>
+</html>
